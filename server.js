@@ -1,30 +1,23 @@
 const express = require('express');
-const cors = require('cors');
+const path = require('path');
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+// Middleware - JSON ဖတ်ဖို့နဲ့ static ဖိုင် (HTML, CSS) တွေပြဖို့
 app.use(express.json());
+app.use(express.static(path.join(__dirname)));
 
-let users = {};
+// Website ကို စဖွင့်တာနဲ့ index.html ပြခိုင်းတာ
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
+// Login စမ်းသပ်ဖို့ API (ဒါက နောက်မှ အသေးစိတ်ရေးမယ်)
 app.post('/login', (req, res) => {
     const { username } = req.body;
-    if (!users[username]) {
-        users[username] = { balance: 100.00 };
-    }
-    res.json({ success: true, balance: users[username].balance });
+    res.json({ message: `Welcome ${username}!` });
 });
 
-app.post('/deposit', (req, res) => {
-    const { username } = req.body;
-    if (users[username]) {
-        users[username].balance += 50.0;
-        res.json({ success: true, newBalance: users[username].balance });
-    }
-});
-
-// ဒီအပိုင်းကို Online တင်လို့ရအောင် ကျွန်တော် ပြင်ပေးထားပြီးသားပါ
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
