@@ -10,16 +10,9 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Login API ကို ပြင်ဆင်ထားပါတယ်
 app.post('/login', (req, res) => {
     const { username } = req.body;
-    res.json({ 
-        success: true, 
-        message: `Welcome ${username}!`,
-        balance: 1000.00  // အစမ်းသုံးဖို့ ပိုက်ဆံ $100 ထည့်ပေးလိုက်ပါမယ်
-    });
+    res.json({ success: true, balance: 1000.00 });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+app.listen(PORT, () => { console.log(`Server running on port ${PORT}`); });
