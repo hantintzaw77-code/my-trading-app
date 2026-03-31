@@ -16,7 +16,7 @@ app.post('/login', (req, res) => {
     res.json({ 
         success: true, 
         message: `Welcome ${username}!`,
-        balance: 1000.00  // အစမ်းသုံးဖို့ ပိုက်ဆံ $1000 ထည့်ပေးလိုက်ပါမယ်
+        balance: 1000.00  // အစမ်းသုံးဖို့ ပိုက်ဆံ $100 ထည့်ပေးလိုက်ပါမယ်
     });
 });
 
